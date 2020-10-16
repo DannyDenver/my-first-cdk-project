@@ -1,5 +1,5 @@
+import aws_cdk.aws_s3 as _s3
 from aws_cdk import core
-from aws_cdk import aws_s3 as _s3
 
 class InitAppStack(core.Stack):
 
@@ -7,7 +7,11 @@ class InitAppStack(core.Stack):
         super().__init__(scope, id, **kwargs)
 
         # The code that defines your stack goes here
-        _s3.Bucket(self, "myBucketID", bucket_name="myfirstcdkprojectbucket32",
-            versioned=True,
-            encryption=_s3.BucketEncryption.KMS_MANAGED, 
+        _s3.Bucket(
+            self, 
+            "myBucketID", 
+            bucket_name="myfirstcdkprojectbucket32",
+            versioned=False,
+            encryption=_s3.BucketEncryption.S3_MANAGED,
+            block_public_access= _s3.BlockPublicAccess.BLOCK_ALL
         )
