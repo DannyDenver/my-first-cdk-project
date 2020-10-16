@@ -2,60 +2,72 @@
 
 from aws_cdk import core
 
-from resource_stacks.custom_vpc import CustomVpcStack
-from resource_stacks.custom_ec2 import CustomEc2Stack
-from resource_stacks.custom_ec2_with_instance_profile import CustomEc2InstanceProfileStack
-from resource_stacks.custom_ec2_with_latest_ami import CustomEc2LatestAmiStack
-from resource_stacks.custom_ec2_with_ebs_piops import CustomEc2PiopsStack
-from resource_stacks.custom_parameters_secrets import CustomParametersSecretsStack
-from resource_stacks.custom_iam_users_groups import CustomIamUsersGroupsStack
-from resource_stacks.custom_iam_roles_policies import CustomRolesPoliciesStack
-from resource_stacks.custom_s3_resource_policy import CustomS3ResourcePolicyStack
-from resource_stacks.custom_sns import CustomSnsStack
-from resource_stacks.custom_sqs import CustomSqsStack
+from my_first_cdk_project.my_first_cdk_project_stack import MyArtifactBucketStack
 
-# Import Serverless Stack resources
-from serverless_stacks.custom_lambda import CustomLambdaStack
-from serverless_stacks.custom_cloudwatch_loggroups import CustomLoggroupStack
-from serverless_stacks.custom_lambda_src_from_s3 import CustomLambdaSrcFromS3Stack
-from serverless_stacks.custom_lambda_as_cron import CustomLambdaAsCronStack
-from serverless_stacks.custom_dynamodb import CustomDynamoDBStack
-from serverless_stacks.custom_privileges_to_lambda import CustomPrivilegesToLambdaStack
-from serverless_stacks.custom_apigw import CustomApiGatewayStack
+# from resource_stacks.custom_vpc import CustomVpcStack
+# from resource_stacks.custom_ec2 import CustomEc2Stack
+# from resource_stacks.custom_ec2_with_instance_profile import CustomEc2InstanceProfileStack
+# from resource_stacks.custom_ec2_with_latest_ami import CustomEc2LatestAmiStack
+# from resource_stacks.custom_ec2_with_ebs_piops import CustomEc2PiopsStack
+# from resource_stacks.custom_parameters_secrets import CustomParametersSecretsStack
+# from resource_stacks.custom_iam_users_groups import CustomIamUsersGroupsStack
+# from resource_stacks.custom_iam_roles_policies import CustomRolesPoliciesStack
+# from resource_stacks.custom_s3_resource_policy import CustomS3ResourcePolicyStack
+# from resource_stacks.custom_sns import CustomSnsStack
+# from resource_stacks.custom_sqs import CustomSqsStack
 
-# Import Monitoring Stacks
-from monitoring_stacks.custom_ec2_with_alarms import CustomEc2WithAlarmsStack
-from monitoring_stacks.custom_cloudwatch_metrics import CustomMetricsStack
-from monitoring_stacks.custom_cloudwatch_live_dashboard import CustomCloudwatchLiveDashboardStack
+# # Import Serverless Stack resources
+# from serverless_stacks.custom_lambda import CustomLambdaStack
+# from serverless_stacks.custom_cloudwatch_loggroups import CustomLoggroupStack
+# from serverless_stacks.custom_lambda_src_from_s3 import CustomLambdaSrcFromS3Stack
+# from serverless_stacks.custom_lambda_as_cron import CustomLambdaAsCronStack
+# from serverless_stacks.custom_dynamodb import CustomDynamoDBStack
+# from serverless_stacks.custom_privileges_to_lambda import CustomPrivilegesToLambdaStack
+# from serverless_stacks.custom_apigw import CustomApiGatewayStack
 
-# EC2 & VPC with Application LoadBalancer
-from app_stacks.vpc_stack import VpcStack
-from app_stacks.web_server_stack import WebServerStack
+# # Import Monitoring Stacks
+# from monitoring_stacks.custom_ec2_with_alarms import CustomEc2WithAlarmsStack
+# from monitoring_stacks.custom_cloudwatch_metrics import CustomMetricsStack
+# from monitoring_stacks.custom_cloudwatch_live_dashboard import CustomCloudwatchLiveDashboardStack
 
-# VPC, EC2, ALB, RDS Stack
-from app_db_stack.vpc_3tier_stack import Vpc3TierStack
-from app_db_stack.web_server_3tier_stack import WebServer3TierStack
-from app_db_stack.rds_3tier_stack import RdsDatabase3TierStack
+# # EC2 & VPC with Application LoadBalancer
+# from app_stacks.vpc_stack import VpcStack
+# from app_stacks.web_server_stack import WebServerStack
 
-from stacks_from_cfn.stack_from_existing_cfn_template import StackFromCloudformationTemplate
+# # VPC, EC2, ALB, RDS Stack
+# from app_db_stack.vpc_3tier_stack import Vpc3TierStack
+# from app_db_stack.web_server_3tier_stack import WebServer3TierStack
+# from app_db_stack.rds_3tier_stack import RdsDatabase3TierStack
 
-# Advanced Use-Cases Stack Resources
-from advanced_use_cases.deploy_static_site import DeployStaticSiteStack
-from advanced_use_cases.deploy_cloudfront_oai_static_site import DeployCloudfrontOaiStaticSiteStack
-from advanced_use_cases.serverless_event_processor_architecture_with_s3_events import ServerlessEventProcessorArchitectureWithS3EventsStack
-from advanced_use_cases.serverless_rest_api_architecture import ServerlessRestApiArchitectureStack
-from advanced_use_cases.serverless_data_stream_processor_architecture_with_kinesis import ServerlessStreamProcessorArchitectureWithKinesisStack
-from advanced_use_cases.serverless_dynamo_event_processor_architecture_with_ddb_streams import ServerlessDdbStreamProcessorArchitectureWithSteamsStack
-from advanced_use_cases.containerized_microservice_architecture_with_ecs import ContainerizedMicroserviceArchitectureWithEcsStack
-from advanced_use_cases.serverless_containers_architecture_with_fargate import ServerlessContainersArchitectureWithFargateStack
-from advanced_use_cases.serverless_batch_processor_architecture_with_fargate import ServerlessBatchProcessorArchitectureWithFargateStack
+# from stacks_from_cfn.stack_from_existing_cfn_template import StackFromCloudformationTemplate
 
-# Serverless Chat Application
-from serverless_chat_application.multi_person_chat_application import MultiPersonChatApplicationStack
+# # Advanced Use-Cases Stack Resources
+# from advanced_use_cases.deploy_static_site import DeployStaticSiteStack
+# from advanced_use_cases.deploy_cloudfront_oai_static_site import DeployCloudfrontOaiStaticSiteStack
+# from advanced_use_cases.serverless_event_processor_architecture_with_s3_events import ServerlessEventProcessorArchitectureWithS3EventsStack
+# from advanced_use_cases.serverless_rest_api_architecture import ServerlessRestApiArchitectureStack
+# from advanced_use_cases.serverless_data_stream_processor_architecture_with_kinesis import ServerlessStreamProcessorArchitectureWithKinesisStack
+# from advanced_use_cases.serverless_dynamo_event_processor_architecture_with_ddb_streams import ServerlessDdbStreamProcessorArchitectureWithSteamsStack
+# from advanced_use_cases.containerized_microservice_architecture_with_ecs import ContainerizedMicroserviceArchitectureWithEcsStack
+# from advanced_use_cases.serverless_containers_architecture_with_fargate import ServerlessContainersArchitectureWithFargateStack
+# from advanced_use_cases.serverless_batch_processor_architecture_with_fargate import ServerlessBatchProcessorArchitectureWithFargateStack
+
+# # Serverless Chat Application
+# from serverless_chat_application.multi_person_chat_application import MultiPersonChatApplicationStack
 
 app = core.App()
 
-env_prod = core.Environment(account="835800058584", region="us-east-1")
+env_danny = core.Environment(
+    account= app.node.try_get_context('dev')['account'],
+    region=app.node.try_get_context('dev')['region'])
+
+MyArtifactBucketStack(app, "myDevStack", env=env_danny)
+
+## Tag all resources in the stack
+core.Tag.add(app, key="Owner",
+             value=app.node.try_get_context('owner'))
+
+app.synth()
 
 # Custom VPC Stack
 # CustomVpcStack(app, "my-custom-vpc-stack", env=env_prod)
@@ -271,21 +283,21 @@ env_prod = core.Environment(account="835800058584", region="us-east-1")
 # )
 
 # Create Serverless Multi Person Chat Application using Fargate
-multi_person_chat_application = MultiPersonChatApplicationStack(
-    app,
-    "multi-person-chat-application",
-    description="Create Serverless Multi Person Chat Application using Fargate"
-)
+# multi_person_chat_application = MultiPersonChatApplicationStack(
+#     app,
+#     "multi-person-chat-application",
+#     description="Create Serverless Multi Person Chat Application using Fargate"
+# )
 
-# Stack Level Tagging
-core.Tag.add(app, key="Owner",
-             value=app.node.try_get_context('owner'))
-core.Tag.add(app, key="OwnerProfile",
-             value=app.node.try_get_context('github_profile'))
-core.Tag.add(app, key="GithubRepo",
-             value=app.node.try_get_context('github_repo_url'))
-core.Tag.add(app, key="ToKnowMore",
-             value=app.node.try_get_context('youtube_profile'))
+# # Stack Level Tagging
+# core.Tag.add(app, key="Owner",
+#              value=app.node.try_get_context('owner'))
+# core.Tag.add(app, key="OwnerProfile",
+#              value=app.node.try_get_context('github_profile'))
+# core.Tag.add(app, key="GithubRepo",
+#              value=app.node.try_get_context('github_repo_url'))
+# core.Tag.add(app, key="ToKnowMore",
+#              value=app.node.try_get_context('youtube_profile'))
 
 
-app.synth()
+# app.synth()

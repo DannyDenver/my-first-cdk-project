@@ -29,6 +29,7 @@ class CustomVpcStack(core.Stack):
             ]
         )
 
+        # tags the every resource in vpc 
         core.Tag.add(custom_vpc, "Owner", "Mystique")
 
         core.CfnOutput(self,
@@ -38,15 +39,17 @@ class CustomVpcStack(core.Stack):
 
         my_bkt = _s3.Bucket(self, "custombktId")
 
+        # add tag to buckets
         core.Tag.add(my_bkt, "Owner", "Mystique")
 
-        # Resource in same account.
+        # Resource in same account. that already exists
         bkt1 = _s3.Bucket.from_bucket_name(
             self,
             "MyImportedBuket",
             "sample-bkt-cdk-010"
         )
 
+        # from a different bucket 
         bkt2 = _s3.Bucket.from_bucket_arn(self,
                                           "crossAccountBucket",
                                           "arn:aws:s3:::SAMPLE-CROSS-BUCKET")
