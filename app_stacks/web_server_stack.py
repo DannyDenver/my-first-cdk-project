@@ -32,7 +32,7 @@ class WebServerStack(core.Stack):
             load_balancer_name="WebServerAlb"
         )
 
-        # Allow ALB to receive internet traffic
+        # Allow ALB to receive internet traffic, security group
         alb.connections.allow_from_any_ipv4(
             _ec2.Port.tcp(80),
             description="Allow Internet access on ALB Port 80"

@@ -7,12 +7,12 @@
     "github_repo_url": "https://github.com/miztiik/my-first-cdk-project",
     "github_profile": "https://github.com/miztiik",
     "youtube_profile": "https://youtube.com/c/valaxytechnologies",
+    "env": {
       "dev": {
         "region": "us-east-1",
         "account": "164549288284"
       },
       "prod": {
-        "support-team": "miztiik@github",
         "region": "us-east-1",
         "account": "164549288284",
         "encryption": true,
@@ -22,6 +22,7 @@
           "cidr_mask": 24,
           "set_reserve": false
         }
+    }
     }
   }
 }

@@ -3,6 +3,9 @@
 from aws_cdk import core
 
 from my_first_cdk_project.my_first_cdk_project_stack import MyArtifactBucketStack
+from resource_stacks.custom_ec2 import CustomEc2Stack
+from resource_stacks.custom_vpc import CustomVpcStack
+
 
 # from resource_stacks.custom_vpc import CustomVpcStack
 # from resource_stacks.custom_ec2 import CustomEc2Stack
@@ -58,10 +61,14 @@ from my_first_cdk_project.my_first_cdk_project_stack import MyArtifactBucketStac
 app = core.App()
 
 env_danny = core.Environment(
-    account= app.node.try_get_context('dev')['account'],
-    region=app.node.try_get_context('dev')['region'])
+    account= app.node.try_get_context('env')['prod']['account'],
+    region=app.node.try_get_context('env')['prod']['region'])
 
-MyArtifactBucketStack(app, "myDevStack", env=env_danny)
+#MyArtifactBucketStack(app, "myDevStack", env=env_danny)
+
+CustomVpcStack(app, "my-custom-vpc-stack")
+
+CustomEc2Stack(app, "my-web-server-stack", env=env_danny)
 
 ## Tag all resources in the stack
 core.Tag.add(app, key="Owner",

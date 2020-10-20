@@ -35,6 +35,7 @@ class CustomIamUsersGroupsStack(core.Stack):
                                     group_name="konstone_group"
                                     )
 
+        # Add user to group
         konstone_group.add_user(user2)
 
         # Login Url Autogeneration

@@ -17,7 +17,7 @@ class CustomParametersSecretsStack(core.Stack):
             description="Load Testing Configuration",
             parameter_name="NoOfConcurrentUsers",
             string_value="100",
-            tier=_ssm.ParameterTier.STANDARD
+            tier=_ssm.ParameterTier.STANDARD # choose transaction rate
         )
         param2 = _ssm.StringParameter(
             self,
@@ -42,6 +42,7 @@ class CustomParametersSecretsStack(core.Stack):
                                          secret_name="cust_db_pass"
                                          )
 
+        # hierarchy of secrets
         templated_secret = _secretsmanager.Secret(self,
                                                   "secret2",
                                                   description="A Templated secret for user data",

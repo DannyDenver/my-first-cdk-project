@@ -12,7 +12,8 @@ class CustomS3ResourcePolicyStack(core.Stack):
         konstone_bkt = _s3.Bucket(self,
                                   "konstoneAssets",
                                   versioned=True,
-                                  removal_policy=core.RemovalPolicy.DESTROY
+                                  # doesnt work if there is content in bucket, manual delete necessary
+                                  removal_policy=core.RemovalPolicy.DESTROY 
                                   )
 
         # Add Bucket Resource policy
@@ -20,7 +21,9 @@ class CustomS3ResourcePolicyStack(core.Stack):
             _iam.PolicyStatement(
                 effect=_iam.Effect.ALLOW,
                 actions=["s3:GetObject"],
+                # give public access only to html files
                 resources=[konstone_bkt.arn_for_objects("*.html")],
+                # anyone can access
                 principals=[_iam.AnyPrincipal()]
             )
         )
@@ -29,8 +32,10 @@ class CustomS3ResourcePolicyStack(core.Stack):
             _iam.PolicyStatement(
                 effect=_iam.Effect.DENY,
                 actions=["s3:*"],
+                # any objects in the bucket
                 resources=[f"{konstone_bkt.bucket_arn}/*"],
                 principals=[_iam.AnyPrincipal()],
+                # if secure transport is false deny access
                 conditions={
                     "Bool": {"aws:SecureTransport": False}
                 }

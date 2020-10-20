@@ -9,7 +9,7 @@ class CustomEc2Stack(core.Stack):
 
         vpc = _ec2.Vpc.from_lookup(self,
                                    "importedVPC",
-                                   vpc_id="vpc-d0a193aa")
+                                   vpc_id="vpc-0f2ed78a2812564e9")
 
         # Read BootStrap Script
         with open("bootstrap_scripts/install_httpd.sh", mode="r") as file:
@@ -28,6 +28,7 @@ class CustomEc2Stack(core.Stack):
                                    vpc_subnets=_ec2.SubnetSelection(
                                        subnet_type=_ec2.SubnetType.PUBLIC
                                    ),
+                                    
                                    user_data=_ec2.UserData.custom(user_data)
                                    )
 

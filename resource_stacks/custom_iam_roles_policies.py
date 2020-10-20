@@ -57,6 +57,7 @@ class CustomRolesPoliciesStack(core.Stack):
         )
 
         # Grant Konstone group permission to Param 1
+        # grant access to individual resource to group
         param1.grant_read(konstone_group)
 
         # Grant Group to LIST ALL SSM Parameters in Console
@@ -67,7 +68,7 @@ class CustomRolesPoliciesStack(core.Stack):
                 "ssm:DescribeParameters"
             ]
         )
-        grpStmt1.sid = "DescribeAllParametersInConsole"
+        grpStmt1.sid = "DescribeAllParametersInConsole" #description of policy
 
         # Add Permissions To Group
         konstone_group.add_to_policy(grpStmt1)

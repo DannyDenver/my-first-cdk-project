@@ -33,7 +33,7 @@ class CustomEc2LatestAmiStack(core.Stack):
             generation=_ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
             edition=_ec2.AmazonLinuxEdition.STANDARD,
             storage=_ec2.AmazonLinuxStorage.EBS,
-            virtualization=_ec2.AmazonLinuxVirt.HVM
+            virtualization=_ec2.AmazonLinuxVirt.HVM,
         )
 
         # Get the latest Windows ami
