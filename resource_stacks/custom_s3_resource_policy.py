@@ -35,7 +35,7 @@ class CustomS3ResourcePolicyStack(core.Stack):
                 # any objects in the bucket
                 resources=[f"{konstone_bkt.bucket_arn}/*"],
                 principals=[_iam.AnyPrincipal()],
-                # if secure transport is false deny access
+                # if secure transport is false deny access, only https requests
                 conditions={
                     "Bool": {"aws:SecureTransport": False}
                 }

@@ -12,6 +12,7 @@ class RdsDatabase3TierStack(core.Stack):
         konstone_db = _rds.DatabaseInstance(self,
                                             "konstoneRDS",
                                             master_username="mystiquemaster",
+                                            # cdk will create password-secret and put in secrets manager
                                             database_name="konstone_db",
                                             engine=_rds.DatabaseInstanceEngine.MYSQL,
                                             vpc=vpc,
@@ -25,12 +26,13 @@ class RdsDatabase3TierStack(core.Stack):
                                                 _ec2.InstanceSize.MICRO
                                             ),
                                             removal_policy=core.RemovalPolicy.DESTROY,
-                                            deletion_protection=False,
+                                            deletion_protection=False, # Do not protect from deletion
                                             delete_automated_backups=True,
                                             backup_retention=core.Duration.days(
                                                 7)
                                             )
 
+        # loop through security groups
         for sg in asg_security_groups:
             konstone_db.connections.allow_default_port_from(
                 sg, "Allow EC2 ASG access to RDS MySQL")
@@ -38,6 +40,7 @@ class RdsDatabase3TierStack(core.Stack):
         # Output RDS Database EndPoint Address
         output_1 = core.CfnOutput(self,
                                   "DatabaseConnectionCommand",
+                                  # can be used to log into mysql db from ec2 in the auto scaling group
                                   value=f"mysql -h {konstone_db.db_instance_endpoint_address} -P 3306 -u mystiquemaster -p",
                                   description="Connect to the database using this command"
                                   )

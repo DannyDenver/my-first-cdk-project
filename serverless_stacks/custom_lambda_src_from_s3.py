@@ -9,7 +9,7 @@ class CustomLambdaSrcFromS3Stack(core.Stack):
     def __init__(self, scope: core.Construct, id: str, ** kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
-        # Import an S3 Bucket):
+        # Import an S3 Bucket), get existing bucket:  
         konstone_bkt = _s3.Bucket.from_bucket_attributes(self,
                                                          "konstoneAssetsBucket",
                                                          bucket_name="konstone-assets-bkt")
@@ -28,7 +28,8 @@ class CustomLambdaSrcFromS3Stack(core.Stack):
                                        reserved_concurrent_executions=1
                                        )
 
-        # Create Custom Loggroup
+        # Create Custom Loggroup 
+        # when lambda gets deleted, log group also is deleted
         # /aws/lambda/function-name
         konstone_lg = _logs.LogGroup(self,
                                      "konstoneLoggroup",

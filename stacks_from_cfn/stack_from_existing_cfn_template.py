@@ -15,11 +15,13 @@ class StackFromCloudformationTemplate(core.Stack):
         except OSError:
             print("Unable to read Cfn Template")
 
+        # includes cloudformation template
         resoures_from_cfn_template = core.CfnInclude(self,
                                                      'konstoneInfra',
                                                      template=cfn_template
                                                      )
 
+        # get arn from resource in template
         encrypted_bkt_arn = core.Fn.get_att("EncryptedS3Bucket", "Arn")
 
         # Output Arn of encrypted Bucket

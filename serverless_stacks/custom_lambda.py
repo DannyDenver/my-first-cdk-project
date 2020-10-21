@@ -16,6 +16,7 @@ class CustomLambdaStack(core.Stack):
         except OSError:
             print("Unable to read Lambda Function Code")
 
+        # never sets IAM role, CDK sets up one with minimum 
         konstone_fn = _lambda.Function(self,
                                        "konstoneFunction",
                                        function_name="konstone_function",
@@ -24,7 +25,7 @@ class CustomLambdaStack(core.Stack):
                                        code=_lambda.InlineCode(
                                            konstone_fn_code),
                                        timeout=core.Duration.seconds(3),
-                                       reserved_concurrent_executions=1,
+                                       reserved_concurrent_executions=1, # only 1 runs at a time
                                        environment={
                                            "LOG_LEVEL": "INFO"
                                        }

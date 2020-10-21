@@ -18,5 +18,6 @@ class CustomSnsStack(core.Stack):
 
         # Add Subscription to SNS Topic
         konstone_topic.add_subscription(
-            _subs.EmailSubscription("konstone@gmail.com")
+            _subs.EmailSubscription("konstone@gmail.com"),
+            # _subs.LambdaSubscription
         )

@@ -35,6 +35,7 @@ class CustomLambdaAsCronStack(core.Stack):
                                        )
 
         # Run Every day at 18:00 UTC
+        # schedule deletion or moving of maps from one storage system to another like glacier after 2 months
         six_pm_cron = _events.Rule(
             self,
             "sixPmRule",
@@ -55,6 +56,6 @@ class CustomLambdaAsCronStack(core.Stack):
             schedule=_events.Schedule.rate(core.Duration.minutes(3))
         )
 
-        # Add Lambda to CW Event Rule
+        # Add Lambda to Cloudwatch Event Trigger Rule with permissions
         six_pm_cron.add_target(_targets.LambdaFunction(konstone_fn))
         run_every_3_minutes.add_target(_targets.LambdaFunction(konstone_fn))

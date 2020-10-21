@@ -15,5 +15,5 @@ class CustomSqsStack(core.Stack):
                                     encryption=_sqs.QueueEncryption.KMS_MANAGED,
                                     retention_period=core.Duration.days(4),
                                     visibility_timeout=core.Duration.seconds(
-                                        45)
+                                        45),
                                     )

@@ -31,6 +31,7 @@ class CustomLoggroupStack(core.Stack):
 
         # Create Custom Loggroup
         # /aws/lambda/function-name
+        # will also delete logs when stack is destroyed
         konstone_lg = _logs.LogGroup(self,
                                      "konstoneLoggroup",
                                      log_group_name=f"/aws/lambda/{konstone_fn.function_name}",
